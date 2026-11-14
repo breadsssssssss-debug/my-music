@@ -1,396 +1,475 @@
-<!DOCTYPE html>  <html lang="en">  
-<head>  
-<meta charset="UTF-8">  
-<meta name="viewport" content="width=device-width, initial-scale=1.0">  
-<title>For You ♡</title>  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Patrick+Hand&family=Caveat:wght@500;600&display=swap" rel="stylesheet">  <style>  
-* {  
-    box-sizing: border-box;  
-    margin: 0;  
-    padding: 0;  
-}  
-  
-body {  
-    min-height: 100vh;  
-    background: #f8dce5;  
-    display: flex;  
-    justify-content: center;  
-    align-items: center;  
-    padding: 20px;  
-    overflow-x: hidden;  
-    color: #704c59;  
-}  
-  
-.page {  
-    display: none;  
-    width: 100%;  
-    max-width: 430px;  
-    animation: appear 0.8s ease;  
-}  
-  
-.page.active {  
-    display: block;  
-}  
-  
-@keyframes appear {  
-    from {  
-        opacity: 0;  
-        transform: translateY(15px);  
-    }  
-    to {  
-        opacity: 1;  
-        transform: translateY(0);  
-    }  
-}  
-  
-/* FLOATING HEARTS */  
-.heart {  
-    position: fixed;  
-    color: #e99bb3;  
-    opacity: 0.5;  
-    animation: float 7s linear infinite;  
-    pointer-events: none;  
-}  
-  
-@keyframes float {  
-    from {  
-        transform: translateY(100vh) rotate(0deg);  
-        opacity: 0;  
-    }  
-    20% { opacity: 0.5; }  
-    to {  
-        transform: translateY(-10vh) rotate(360deg);  
-        opacity: 0;  
-    }  
-}  
-  
-/* ENVELOPE */  
-.cover {  
-    text-align: center;  
-}  
-  
-.cover h1 {  
-    font-family: 'Playfair Display', serif;  
-    font-size: 30px;  
-    margin-bottom: 12px;  
-    color: #9d6278;  
-}  
-  
-.cover p {  
-    font-family: 'Caveat', cursive;  
-    font-size: 23px;  
-    margin-bottom: 35px;  
-}  
-  
-.envelope {  
-    width: 280px;  
-    height: 180px;  
-    background: #eaa9bd;  
-    margin: auto;  
-    position: relative;  
-    cursor: pointer;  
-    border-radius: 5px;  
-    box-shadow: 0 12px 25px #bd819566;  
-    transition: transform 0.3s;  
-}  
-  
-.envelope:hover {  
-    transform: translateY(-6px);  
-}  
-  
-.envelope::before {  
-    content: "";  
-    position: absolute;  
-    top: 0;  
-    left: 0;  
-    border-left: 140px solid transparent;  
-    border-right: 140px solid transparent;  
-    border-top: 100px solid #f4c2d1;  
-    z-index: 2;  
-}  
-  
-.envelope::after {  
-    content: "";  
-    position: absolute;  
-    bottom: 0;  
-    left: 0;  
-    border-left: 140px solid #df91aa;  
-    border-right: 140px solid #df91aa;  
-    border-top: 90px solid transparent;  
-    border-bottom: 90px solid #df91aa;  
-    border-radius: 0 0 5px 5px;  
-}  
-  
-.seal {  
-    position: absolute;  
-    z-index: 3;  
-    top: 75px;  
-    left: 50%;  
-    transform: translateX(-50%);  
-    width: 48px;  
-    height: 48px;  
-    border-radius: 50%;  
-    background: #fff0f4;  
-    display: flex;  
-    align-items: center;  
-    justify-content: center;  
-    color: #cf6f91;  
-    font-size: 24px;  
-    box-shadow: 0 3px 8px #a75c7555;  
-}  
-  
-.tap {  
-    margin-top: 30px;  
-    font-family: 'Patrick Hand', cursive;  
-    font-size: 19px;  
-}  
-  
-/* NOTEBOOK PAPER */  
-.paper {  
-    background:  
-        linear-gradient(to right, transparent 38px, #efb8c8 39px, transparent 40px),  
-        repeating-linear-gradient(  
-            to bottom,  
-            #fffdfb 0px,  
-            #fffdfb 30px,  
-            #dce5ed 31px,  
-            #fffdfb 32px  
-        );  
-    padding: 35px 25px 35px 55px;  
-    border-radius: 8px;  
-    box-shadow: 0 10px 30px #b87e9255;  
-    position: relative;  
-    line-height: 32px;  
-    min-height: 480px;  
-}  
-  
-.paper::before {  
-    content: "♡";  
-    position: absolute;  
-    top: 8px;  
-    right: 18px;  
-    color: #e6a0b6;  
-    font-size: 25px;  
-}  
-  
-.paper h2 {  
-    font-family: 'Playfair Display', serif;  
-    font-size: 25px;  
-    color: #a75f79;  
-    margin-bottom: 18px;  
-    line-height: 1.4;  
-}  
-  
-.paper p {  
-    font-family: 'Patrick Hand', cursive;  
-    font-size: 19px;  
-    margin-bottom: 15px;  
-}  
-  
-.signature {  
-    font-family: 'Caveat', cursive;  
-    font-size: 25px;  
-    color: #a75f79;  
-    margin-top: 15px;  
-}  
-  
-button {  
-    border: none;  
-    background: #d985a2;  
-    color: white;  
-    padding: 12px 25px;  
-    border-radius: 25px;  
-    font-family: 'Patrick Hand', cursive;  
-    font-size: 18px;  
-    cursor: pointer;  
-    margin-top: 25px;  
-    box-shadow: 0 4px 10px #b66e8955;  
-    transition: 0.2s;  
-}  
-  
-button:hover {  
-    background: #c66f8e;  
-    transform: scale(1.04);  
-}  
-  
-.music-control {  
-    position: fixed;  
-    top: 15px;  
-    right: 15px;  
-    margin: 0;  
-    font-size: 15px;  
-    padding: 9px 15px;  
-    z-index: 10;  
-}  
-  
-.center {  
-    text-align: center;  
-}  
-</style>  </head>  <body>  <!-- MUSIC -->  <audio id="music" loop preload="none">  
-    <source src="https://raw.githubusercontent.com/breadsssssssss-debug/my-music/main/tiktok_downloader_1794654700362.mp3" type="audio/mpeg">  
-</audio>  <button class="music-control" id="musicButton" onclick="toggleMusic()">  
-    ♫ Play Music  
-</button>  <!-- PAGE 1: ENVELOPE -->  <section class="page active cover" id="cover">  <h1>For You</h1>  
-<p>something special on a special day</p>  
 
-<div class="envelope" onclick="openLetter()">  
-    <div class="seal">♥</div>  
-</div>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You ♡</title>
 
-<div class="tap">Tap the little heart ♡</div>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Patrick+Hand&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
 
-</section>  <!-- PAGE 2: BIRTHDAY WISHES -->  <section class="page" id="birthdayPage">  <div class="paper">  
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-    <h2>HAPPY BIRTHDAYY!!! ♡</h2>  
+body {
+    min-height: 100vh;
+    background: #EAF6FF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    overflow-x: hidden;
+    color: #526F8A;
+}
 
-    <p>  
-         <span id="birthdayName">hii supiaaa</span>,  
-    </p>  
+/* PAGE SYSTEM */
 
-    <p>  
-        firstly, Sannah Helwah to youuu
-    </p>  
+.page {
+    display: none;
+    width: 100%;
+    max-width: 430px;
+    animation: appear 0.8s ease;
+}
 
-    <p>  
-       on this special day, i wanna say happyy sweett 21yo and may this day brings happiness to yourr life and celebrating this
-       special dayy with your family and friendsss. or go to a shoppingg mall 👀
-    </p>  
+.page.active {
+    display: block;
+}
 
-    <p>  
-        alwayss remember to take care of yourselff, enjoy the little thingss in your life and never stop being the person you are. Like Bubbles from powerpuff girl. hhehe  
-    </p>  
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
-    <p>  
-        may the world not be so cruel to you, may the little things in life bring happines to you, and may someone be so gentlee with your soft hearted person.
-        you deserve a wonderful birthday and an even more wonderful year ahead.  
-    </p>  
+/* FLOATING HEARTS */
 
-    <div class="signature">  
-        With warm wishes ♡  
-    </div>  
+.heart {
+    position: fixed;
+    color: #82BCEB;
+    opacity: 0.5;
+    animation: float 7s linear infinite;
+    pointer-events: none;
+}
 
-</div>  
+@keyframes float {
+    from {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+    }
+    20% {
+        opacity: 0.5;
+    }
+    to {
+        transform: translateY(-10vh) rotate(360deg);
+        opacity: 0;
+    }
+}
 
-<div class="center">  
-    <button onclick="showConfession()">  
-        One last thing... ♡  
-    </button>  
-</div>
+/* ENVELOPE PAGE */
 
-</section>  <!-- PAGE 3: CONFESSION -->  <section class="page" id="confessionPage">  <div class="paper">  
+.cover {
+    text-align: center;
+}
 
-    </h2> ♡</h2>  
+.cover h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 30px;
+    margin-bottom: 12px;
+    color: #5686B5;
+}
 
-    <p>  
-        As a reminderrr, dont forget to jaga solatt, jaga auratt,jagaa pemakaiaann and moree 
-    </p>  
+.cover p {
+    font-family: 'Caveat', cursive;
+    font-size: 23px;
+    margin-bottom: 35px;
+}
 
-    <p>  
-      biasakan pakaii pakaiann yang longgar (tak ketat), wear handsock everydayy, and get used to wear tudung labuh everytimee.
-        im not saying this to judge you or whatt, this is justt a reminder fromm mee :) and you look ethereal. Allahumma Barik.
-    </p>  
+.envelope {
+    width: 280px;
+    height: 180px;
+    background: #A9D4F5;
+    margin: auto;
+    position: relative;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 0 12px 25px #79A9D566;
+    transition: transform 0.3s;
+}
 
-    <p>  
-        honestly, i wanna say thank you for givingg me a chancee  to getting to know youuu even
-        tho there's so muchh i didn't know yet, but if i ever got the chance i gladly take the chance
-    </p>  
- 
-    <p>  
-        Once again, happy birthday!!!. I hope this little surprise  
-        makes you smile. ♡  and hope the reminderr wontt make youu kecill hatii. And 
-        hope this kind if acts makes the day feels more speciall
-    </p>  
+.envelope:hover {
+    transform: translateY(-6px);
+}
 
-    <div class="signature">  
-        ,<br>  
-        <span id="senderName">Forr Youu</span>  
-    </div>  
+.envelope::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-left: 140px solid transparent;
+    border-right: 140px solid transparent;
+    border-top: 100px solid #CDE8FC;
+    z-index: 2;
+}
 
-</div>
+.envelope::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border-left: 140px solid #91C4EC;
+    border-right: 140px solid #91C4EC;
+    border-top: 90px solid transparent;
+    border-bottom: 90px solid #91C4EC;
+    border-radius: 0 0 5px 5px;
+}
 
-</section>  <script>  
-  
-/* CHANGE THESE DETAILS */  
-const birthdayName = "hii sufiaaa";  
-const senderName = "Forr Youu";  
-  
-/* SET NAMES */  
-document.getElementById("birthdayName").textContent = birthdayName;  
-document.getElementById("senderName").textContent = senderName;  
-  
-  
-/* MUSIC SYSTEM */  
-const music = document.getElementById("music");  
-const musicButton = document.getElementById("musicButton");  
-  
-async function startMusic() {  
-  
-    try {  
-  
-        await music.play();  
-        musicButton.textContent = "♫ Pause Music";  
-  
-    } catch (error) {  
-  
-        musicButton.textContent = "♫ Tap to Play";  
-        console.log("Music could not play:", error);  
-  
-    }  
-  
-}  
-  
-function toggleMusic() {  
-  
-    if (music.paused) {  
-        startMusic();  
-    } else {  
-  
-        music.pause();  
-        musicButton.textContent = "♫ Play Music";  
-  
-    }  
-  
-}  
-  
-  
-/* PAGE NAVIGATION */  
-function openLetter() {  
-  
-    startMusic();  
-  
-    document.getElementById("cover").classList.remove("active");  
-    document.getElementById("birthdayPage").classList.add("active");  
-  
-}  
-  
-function showConfession() {  
-  
-    document.getElementById("birthdayPage").classList.remove("active");  
-    document.getElementById("confessionPage").classList.add("active");  
-  
-}  
-  
-  
-/* FLOATING HEARTS */  
-function createHeart() {  
-  
-    const heart = document.createElement("div");  
-  
-    heart.className = "heart";  
-    heart.textContent = "♡";  
-  
-    heart.style.left = Math.random() * 100 + "vw";  
-    heart.style.fontSize = (15 + Math.random() * 20) + "px";  
-    heart.style.animationDuration = (5 + Math.random() * 5) + "s";  
-  
-    document.body.appendChild(heart);  
-  
-    setTimeout(() => {  
-        heart.remove();  
-    }, 10000);  
-  
-}  
-  
-setInterval(createHeart, 800);  
-  
-</script>  </body>  
-</html>  
+.seal {
+    position: absolute;
+    z-index: 3;
+    top: 75px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #F5FBFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #619BCB;
+    font-size: 24px;
+    box-shadow: 0 3px 8px #719FCB55;
+}
+
+.tap {
+    margin-top: 30px;
+    font-family: 'Patrick Hand', cursive;
+    font-size: 19px;
+}
+
+/* NOTEBOOK PAPER */
+
+.paper {
+    background:
+        linear-gradient(to right, transparent 38px, #B8DDF5 39px, transparent 40px),
+        repeating-linear-gradient(
+            to bottom,
+            #fffdfb 0px,
+            #fffdfb 30px,
+            #DCECF8 31px,
+            #fffdfb 32px
+        );
+    padding: 35px 25px 35px 55px;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px #83AED055;
+    position: relative;
+    line-height: 32px;
+    min-height: 480px;
+}
+
+.paper::before {
+    content: "♡";
+    position: absolute;
+    top: 8px;
+    right: 18px;
+    color: #82BCEB;
+    font-size: 25px;
+}
+
+.paper h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 25px;
+    color: #5686B5;
+    margin-bottom: 18px;
+    line-height: 1.4;
+}
+
+.paper p {
+    font-family: 'Patrick Hand', cursive;
+    font-size: 19px;
+    margin-bottom: 15px;
+}
+
+.signature {
+    font-family: 'Caveat', cursive;
+    font-size: 25px;
+    color: #5686B5;
+    margin-top: 15px;
+}
+
+/* BUTTONS */
+
+button {
+    border: none;
+    background: #79B5E3;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 25px;
+    font-family: 'Patrick Hand', cursive;
+    font-size: 18px;
+    cursor: pointer;
+    margin-top: 25px;
+    box-shadow: 0 4px 10px #6C9FCB55;
+    transition: 0.2s;
+}
+
+button:hover {
+    background: #619BCB;
+    transform: scale(1.04);
+}
+
+.music-control {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    margin: 0;
+    font-size: 15px;
+    padding: 9px 15px;
+    z-index: 10;
+}
+
+.center {
+    text-align: center;
+}
+
+/* MOBILE SCREEN */
+
+@media (max-width: 400px) {
+    .paper {
+        padding: 35px 18px 35px 48px;
+    }
+
+    .paper p {
+        font-size: 18px;
+    }
+
+    .envelope {
+        transform: scale(0.9);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- BACKGROUND MUSIC -->
+
+<audio id="music" loop preload="none">
+    <source src="https://raw.githubusercontent.com/breadsssssssss-debug/my-music/main/tiktok_downloader_1794654700362.mp3" type="audio/mpeg">
+</audio>
+
+<button class="music-control" id="musicButton" onclick="toggleMusic()">
+    ♫ Play Music
+</button>
+
+
+<!-- PAGE 1: ENVELOPE -->
+
+<section class="page active cover" id="cover">
+
+    <h1>For You</h1>
+
+    <p>something special on a special day</p>
+
+    <div class="envelope" onclick="openLetter()">
+        <div class="seal">♥</div>
+    </div>
+
+    <div class="tap">
+        Tap the little heart ♡
+    </div>
+
+</section>
+
+
+<!-- PAGE 2: BIRTHDAY WISHES -->
+
+<section class="page" id="birthdayPage">
+
+    <div class="paper">
+
+        <h2>HAPPY BIRTHDAYY!!! ♡</h2>
+
+        <p>
+            <span id="birthdayName">hii sufiaaa</span>,
+        </p>
+
+        <p>
+            firstly, Sannah Helwah to youuu
+        </p>
+
+        <p>
+            on this special day, i wanna say happyy sweett 21yo and may this day brings happiness to yourr life and celebrating this special dayy with your family and friendsss. or go to a shoppingg mall 👀
+        </p>
+
+        <p>
+            alwayss remember to take care of yourselff, enjoy the little thingss in your life and never stop being the person you are. Like Bubbles from powerpuff girl. hhehe
+        </p>
+
+        <p>
+            may the world not be so cruel to you, may the little things in life bring happines to you, and may someone be so gentlee with your soft hearted person. you deserve a wonderful birthday and an even more wonderful year ahead.
+        </p>
+
+        <div class="signature">
+            With warm wishes ♡
+        </div>
+
+    </div>
+
+    <div class="center">
+        <button onclick="showConfession()">
+            One last thing... ♡
+        </button>
+    </div>
+
+</section>
+
+
+<!-- PAGE 3: PERSONAL MESSAGE -->
+
+<section class="page" id="confessionPage">
+
+    <div class="paper">
+
+        <h2>A Little Reminder ♡</h2>
+
+        <p>
+            As a reminderrr, dont forget to jaga solatt, jaga auratt,jagaa pemakaiaann and moree
+        </p>
+
+        <p>
+            biasakan pakaii pakaiann yang longgar (tak ketat), wear handsock everydayy, and get used to wear tudung labuh everytimee. im not saying this to judge you or whatt, this is justt a reminder fromm mee :) and you look ethereal. Allahumma Barik.
+        </p>
+
+        <p>
+            honestly, i wanna say thank you for givingg me a chancee to getting to know youuu even tho there's so muchh i didn't know yet, but if i ever got the chance i gladly take the chance
+        </p>
+
+        <p>
+            Once again, happy birthday!!!. I hope this little surprise makes you smile. ♡ and hope the reminderr wontt make youu kecill hatii. And hope this kind if acts makes the day feels more speciall
+        </p>
+
+        <div class="signature">
+            ,<br>
+            <span id="senderName">Forr Youu</span>
+        </div>
+
+    </div>
+
+</section>
+
+
+<script>
+
+/* CHANGE THESE DETAILS */
+
+const birthdayName = "hii sufiaaa";
+const senderName = "Forr Youu";
+
+
+/* SET NAMES */
+
+document.getElementById("birthdayName").textContent = birthdayName;
+document.getElementById("senderName").textContent = senderName;
+
+
+/* MUSIC SYSTEM */
+
+const music = document.getElementById("music");
+const musicButton = document.getElementById("musicButton");
+
+async function startMusic() {
+
+    try {
+
+        await music.play();
+        musicButton.textContent = "♫ Pause Music";
+
+    } catch (error) {
+
+        musicButton.textContent = "♫ Tap to Play";
+        console.log("Music could not play:", error);
+
+    }
+
+}
+
+function toggleMusic() {
+
+    if (music.paused) {
+
+        startMusic();
+
+    } else {
+
+        music.pause();
+        musicButton.textContent = "♫ Play Music";
+
+    }
+
+}
+
+
+/* PAGE NAVIGATION */
+
+function openLetter() {
+
+    startMusic();
+
+    document.getElementById("cover").classList.remove("active");
+
+    document.getElementById("birthdayPage").classList.add("active");
+
+    window.scrollTo(0, 0);
+
+}
+
+function showConfession() {
+
+    document.getElementById("birthdayPage").classList.remove("active");
+
+    document.getElementById("confessionPage").classList.add("active");
+
+    window.scrollTo(0, 0);
+
+}
+
+
+/* FLOATING HEARTS */
+
+function createHeart() {
+
+    const heart = document.createElement("div");
+
+    heart.className = "heart";
+    heart.textContent = "♡";
+
+    heart.style.left = Math.random() * 100 + "vw";
+
+    heart.style.fontSize = (15 + Math.random() * 20) + "px";
+
+    heart.style.animationDuration = (5 + Math.random() * 5) + "s";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+        heart.remove();
+    }, 10000);
+
+}
+
+setInterval(createHeart, 800);
+
+</script>
+
+</body>
+</html>
